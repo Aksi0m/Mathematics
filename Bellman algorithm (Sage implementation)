@@ -3,9 +3,9 @@ def Bellman(D,vk):
     Bellmanov algoritam za pronalazak najkracih putova u tezinskom digrafu od vrha vk prema svim ostalim vrhovima.
 	@author Renato Turić
   	@param	D - tezinski digraf (mora biti aciklican)
-			vk - bilo koji vrh u tezinskom digrafu
+		vk - bilo koji vrh u tezinskom digrafu
 	@return Vraca uredeni par od dva rjecnika. Prvi rjecnik prikazuje udaljenosti pojedinih vrhova od vrha vk.
-			Drugi rjecnik prikazuje prethodne vrhove pojedinih vrhova na najkracem putu od vrha vk
+		Drugi rjecnik prikazuje prethodne vrhove pojedinih vrhova na najkracem putu od vrha vk
     """
 	
     #ukoliko nije aciklican graf izbaci poruku o gresci i prekini algoritam
