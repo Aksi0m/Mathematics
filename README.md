@@ -1,4 +1,4 @@
 Mathematics
 ===========
 
-Repository for algorithm in mathematics
+Repository for algorithms in mathematics
