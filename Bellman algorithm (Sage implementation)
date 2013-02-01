@@ -1,0 +1,46 @@
+def Bellman(D,vk):
+    """
+  Bellmanov algoritam za pronalazak najkracih putova u tezinskom digrafu od vrha vk prema svim ostalim vrhovima.
+	@author Renato Turić
+  @param	D - tezinski digraf (mora biti aciklican)
+			vk - bilo koji vrh u tezinskom digrafu
+	@return Vraca uredeni par od dva rjecnika. Prvi rjecnik prikazuje udaljenosti pojedinih vrhova od vrha vk.
+			Drugi rjecnik prikazuje prethodne vrhove pojedinih vrhova na najkracem putu od vrha vk
+    """
+	
+    #ukoliko nije aciklican graf izbaci poruku o gresci i prekini algoritam
+    if(D.is_directed_acyclic() == False):
+        return "Graf nije aciklican!"
+		
+    #rjecnik u kojem ce se spremati tezine bridova. Format {(vi,vj) : vriejdnost}
+	tezina_brida={}
+    for e in D.edges():
+        tezina_brida[(e[0],e[1])]=e[2]
+	#pomocni rjecnik koja ce pamtiti prethodnike vrhova
+    P = {}
+	#rjecnik koji ce pamtiti udaljenost izmedu pojedinih vrhova
+    udaljenost = {}
+	#topolosko sortiranje digrafa te spremanje redosljeda vrhova u listu
+    V = D.topological_sort()
+	#postavljanje pocetnih vrijednosti udaljenosti vrhova
+    udaljenost[0]={}
+    for v in V:
+        if v == vk:
+            udaljenost[0][v] = 0
+            P[v] = None
+        else:
+            udaljenost[0][v] = Infinity
+            P[v] = None   
+	#kreiranje nove liste od vk elementa pa do kraja liste - uvjet bellmanovog algoritma
+    vrhoviNakonVk = V[V.index(vk)+1:]     
+	#prolazak kroz vrhove i usporedba udaljenosti medu susjedima pri cemu se najmanja udaljenost pamti u varijablu min i vrh s kojim je postignuta najmanja udaljenost se sprema u P
+    for v in vrhoviNakonVk:
+        min = +Infinity
+        for u in D.neighbors_in(v):       
+            if (udaljenost[0][u] + tezina_brida[(u,v)]) < min:
+                udaljenost[0][v] = udaljenost[0][u] + tezina_brida[(u,v)]
+                min = udaljenost[0][v]
+                P[v] = u  
+				
+    #vrati uredeni par od dva rjecnika
+    return (udaljenost[len(udaljenost)-1], P)
