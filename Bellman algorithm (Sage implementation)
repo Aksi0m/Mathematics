@@ -1,6 +1,6 @@
 def Bellman(D,vk):
     """
-  Bellmanov algoritam za pronalazak najkracih putova u tezinskom digrafu od vrha vk prema svim ostalim vrhovima.
+    Bellmanov algoritam za pronalazak najkracih putova u tezinskom digrafu od vrha vk prema svim ostalim vrhovima.
 	@author Renato Turić
   	@param	D - tezinski digraf (mora biti aciklican)
 			vk - bilo koji vrh u tezinskom digrafu
@@ -13,16 +13,16 @@ def Bellman(D,vk):
         return "Graf nije aciklican!"
 		
     #rjecnik u kojem ce se spremati tezine bridova. Format {(vi,vj) : vriejdnost}
-	tezina_brida={}
+    tezina_brida={}
     for e in D.edges():
         tezina_brida[(e[0],e[1])]=e[2]
-	#pomocni rjecnik koja ce pamtiti prethodnike vrhova
+    #pomocni rjecnik koja ce pamtiti prethodnike vrhova
     P = {}
-	#rjecnik koji ce pamtiti udaljenost izmedu pojedinih vrhova
+    #rjecnik koji ce pamtiti udaljenost izmedu pojedinih vrhova
     udaljenost = {}
-	#topolosko sortiranje digrafa te spremanje redosljeda vrhova u listu
+    #topolosko sortiranje digrafa te spremanje redosljeda vrhova u listu
     V = D.topological_sort()
-	#postavljanje pocetnih vrijednosti udaljenosti vrhova
+    #postavljanje pocetnih vrijednosti udaljenosti vrhova
     udaljenost[0]={}
     for v in V:
         if v == vk:
@@ -31,9 +31,9 @@ def Bellman(D,vk):
         else:
             udaljenost[0][v] = Infinity
             P[v] = None   
-	#kreiranje nove liste od vk elementa pa do kraja liste - uvjet bellmanovog algoritma
+    #kreiranje nove liste od vk elementa pa do kraja liste - uvjet bellmanovog algoritma
     vrhoviNakonVk = V[V.index(vk)+1:]     
-	#prolazak kroz vrhove i usporedba udaljenosti medu susjedima pri cemu se najmanja udaljenost pamti u varijablu min i vrh s kojim je postignuta najmanja udaljenost se sprema u P
+    #prolazak kroz vrhove i usporedba udaljenosti medu susjedima pri cemu se najmanja udaljenost pamti u varijablu min i vrh s kojim je postignuta najmanja udaljenost se sprema u P
     for v in vrhoviNakonVk:
         min = +Infinity
         for u in D.neighbors_in(v):       
